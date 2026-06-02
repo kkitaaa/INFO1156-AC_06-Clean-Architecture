@@ -49,6 +49,27 @@ La aplicación queda disponible en:
 - `http://localhost:3000/docs`
 - `http://localhost:5555` (Prisma Studio - Database Manager)
 
+Problemas arquitectónicos detectados
+Los Services contienen lógica de negocio y acceso a datos
+- PostsService, CommentsService, LikesService, etc.
+- Usan directamente PrismaService.
+- Esto acopla la lógica de negocio a la base de datos.
+Dependencias entre módulos
+- CommentsService depende de PostsService.
+- LikesService depende de PostsService.
+Lógica de negocio mezclada
+- Moderación.
+- Ranking del feed.
+- Validaciones.
+- Persistencia.
+No existen capas
+- No hay Domain.
+- No hay Application.
+- No hay Infrastructure.
+- Todo está en Controllers + Services.
+Prisma está filtrándose por toda la aplicación
+- El dominio debería ser independiente de Prisma.
+
 Comandos útiles:
 
 - `make stop` para detener el contenedor
