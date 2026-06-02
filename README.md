@@ -49,7 +49,7 @@ La aplicación queda disponible en:
 - `http://localhost:3000/docs`
 - `http://localhost:5555` (Prisma Studio - Database Manager)
 
-Problemas arquitectónicos detectados
+## Problemas arquitectónicos detectados
 Los Services contienen lógica de negocio y acceso a datos
 - PostsService, CommentsService, LikesService, etc.
 - Usan directamente PrismaService.
