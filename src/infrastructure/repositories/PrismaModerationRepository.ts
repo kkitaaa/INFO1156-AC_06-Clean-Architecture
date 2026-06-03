@@ -7,8 +7,8 @@ export class PrismaModerationRepository {
     return this.prisma.prohibitedWord.findMany();
   }
 
-  async findByWord(word: string) {
-    return this.prisma.prohibitedWord.findUnique({ where: { word } });
+  async findById(id: string) {
+    return this.prisma.prohibitedWord.findUnique({ where: { id } });
   }
 
   async create(data: { word: string; category: string }) {
