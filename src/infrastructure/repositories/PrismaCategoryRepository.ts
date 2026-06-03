@@ -4,11 +4,11 @@ export class PrismaCategoryRepository {
   private prisma = new PrismaClient();
 
   async findAll() {
-    return this.prisma.category.findMany({ include: { posts: true } });
+    return this.prisma.category.findMany();
   }
 
-  async findBySlug(slug: string) {
-    return this.prisma.category.findUnique({ where: { slug } });
+  async findById(id: string) {
+    return this.prisma.category.findUnique({ where: { id } });
   }
 
   async create(data: { name: string; slug: string }) {

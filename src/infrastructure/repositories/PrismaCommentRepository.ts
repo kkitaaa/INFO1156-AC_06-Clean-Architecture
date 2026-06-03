@@ -3,8 +3,8 @@ import { PrismaClient } from "@prisma/client";
 export class PrismaCommentRepository {
   private prisma = new PrismaClient();
 
-  async findAllByPost(postId: string) {
-    return this.prisma.comment.findMany({ where: { postId } });
+  async findAll() {
+    return this.prisma.comment.findMany();
   }
 
   async findById(id: string) {
