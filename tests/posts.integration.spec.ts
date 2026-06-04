@@ -1,7 +1,7 @@
 import { INestApplication, ValidationPipe } from "@nestjs/common"
 import { Test, TestingModule } from "@nestjs/testing"
 import { AppModule } from "@/app.module"
-import { PrismaService } from "@/shared/prisma.service"
+import { PrismaService } from "@/infrastructure/prisma.service"
 import request from "supertest"
 
 describe("API Integration", () => {

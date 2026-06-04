@@ -6,7 +6,7 @@ import {
 import { CreateCommentDto } from "@/posts/posts.dtos"
 import { ModerationService } from "@/moderation/moderation.service"
 import { PostsService } from "@/posts/posts.service"
-import { PrismaService } from "@/shared/prisma.service"
+import { PrismaService } from "@/infrastructure/prisma.service"
 
 @Injectable()
 export class CommentsService {

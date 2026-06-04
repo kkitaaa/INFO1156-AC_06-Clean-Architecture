@@ -1,17 +1,29 @@
-import { PrismaClient } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
+import { LikeRepository } from "@/domain/repositories/like.repository";
+import { Like } from "@/domain/entities/like.entity";
+import { PrismaService } from "@/infrastructure/prisma.service";
 
-export class PrismaLikeRepository {
-  private prisma = new PrismaClient();
+@Injectable()
+export class PrismaLikeRepository implements LikeRepository {
+  constructor(private prisma: PrismaService) {}
 
-  async findAll() {
+  async findAll(): Promise<Like[]> {
     return this.prisma.like.findMany();
   }
 
-  async findById(id: string) {
+  async findById(id: string): Promise<Like | null> {
     return this.prisma.like.findUnique({ where: { id } });
   }
 
-  async create(data: { postId: string; reactionType: string; weight: number; source: string }) {
-    return this.prisma.like.create({ data });
+  async findByPostId(postId: string): Promise<Like[]> {
+    return this.prisma.like.findMany({ where: { postId } });
+  }
+
+  async create(like: Like): Promise<Like> {
+    return this.prisma.like.create({ data: like });
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.prisma.like.delete({ where: { id } });
   }
 }

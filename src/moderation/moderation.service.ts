@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common"
-import { PrismaService } from "@/shared/prisma.service"
+import { PrismaService } from "@/infrastructure/prisma.service"
 
 export type ModerationResult = {
     approved: boolean

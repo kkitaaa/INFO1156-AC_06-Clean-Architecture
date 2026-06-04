@@ -1,17 +1,22 @@
-import { PrismaClient } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
+import { PostRepository } from "@/domain/repositories/post.repository";
+import { Post } from "@/domain/entities/post.entity";
+import { CreatePostData } from "@/domain/dtos/create-post-data";
+import { PrismaService } from "@/infrastructure/prisma.service";
 
-export class PrismaPostRepository {
-  private prisma = new PrismaClient();
+@Injectable()
+export class PrismaPostRepository implements PostRepository {
+  constructor(private prisma: PrismaService) {}
 
-  async findAll() {
+  async findAll(): Promise<Post[]> {
     return this.prisma.post.findMany();
   }
 
-  async findById(id: string) {
+  async findById(id: string): Promise<Post | null> {
     return this.prisma.post.findUnique({ where: { id } });
   }
 
-  async create(data: { title: string; description: string; imageUrl: string; categoryId?: string }) {
+  async create(data: CreatePostData): Promise<Post> {
     return this.prisma.post.create({ data });
   }
 }

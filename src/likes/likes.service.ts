@@ -5,7 +5,7 @@ import {
 } from "@nestjs/common"
 import { AddLikeDto } from "@/posts/posts.dtos"
 import { PostsService } from "@/posts/posts.service"
-import { PrismaService } from "@/shared/prisma.service"
+import { PrismaService } from "@/infrastructure/prisma.service"
 
 @Injectable()
 export class LikesService {
