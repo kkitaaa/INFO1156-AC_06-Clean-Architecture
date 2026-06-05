@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { ModerationRepository } from "@/domain/repositories/moderation.repository";
 import { ProhibitedWord } from "@/domain/entities/prohibited-word.entity";
 import { PrismaService } from "@/infrastructure/prisma.service";
@@ -16,6 +16,17 @@ export class PrismaModerationRepository implements ModerationRepository {
   }
 
   async removeWord(id: string): Promise<void> {
-    await this.prisma.prohibitedWord.delete({ where: { id } });
+    try {
+      await this.prisma.prohibitedWord.delete({ where: { id } });
+    } catch (err: unknown) {
+      if (
+        err instanceof Error &&
+        "code" in err &&
+        (err as { code: string }).code === "P2025"
+      ) {
+        throw new NotFoundException("Palabra prohibida no encontrada");
+      }
+      throw err;
+    }
   }
 }
