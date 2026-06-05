@@ -4,6 +4,7 @@ import { PrismaModerationRepository } from "@/infrastructure/repositories/Prisma
 import { FindAllProhibitedWordsUseCase } from "@/application/use-cases/moderation/find-all-prohibited-words.use-case"
 import { CreateProhibitedWordUseCase } from "@/application/use-cases/moderation/create-prohibited-word.use-case"
 import { DeleteProhibitedWordUseCase } from "@/application/use-cases/moderation/delete-prohibited-word.use-case"
+import { ModerationService } from "./moderation.service" 
 
 @Module({
     controllers: [ModerationController],
@@ -15,6 +16,10 @@ import { DeleteProhibitedWordUseCase } from "@/application/use-cases/moderation/
         FindAllProhibitedWordsUseCase,
         CreateProhibitedWordUseCase,
         DeleteProhibitedWordUseCase,
+        ModerationService, 
     ],
+    exports: [
+        ModerationService, 
+    ]
 })
 export class ModerationModule {}
